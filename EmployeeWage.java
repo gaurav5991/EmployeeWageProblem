@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class EmployeeWage implements computeEmpWageInterface
 {
 
@@ -7,26 +9,28 @@ public class EmployeeWage implements computeEmpWageInterface
 		
 	private int numOfCompany = 0;
 	
-	private CompanyEmpWage[] companyEmpWage;
+	private ArrayList<CompanyEmpWage> companyEmpWageList;
+	
 		
 	public EmployeeWage() 
 	{
-		companyEmpWage = new CompanyEmpWage[5];
+		companyEmpWageList = new ArrayList<CompanyEmpWage>();
 	}
 		
 	public void addCompanyEmpWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
 	{
-		companyEmpWage[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHour, numOfWorkingDays, maxHrsInMonth);
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHour, numOfWorkingDays, maxHrsInMonth);
 		
-		numOfCompany++;
+		companyEmpWageList.add(companyEmpWage);
 	}	
 	
 	public void computeWage()
 	{
-		for(int i=0;i<numOfCompany;i++)
+		for(int i=0;i<companyEmpWageList.size();i++)
 		{
-			companyEmpWage[i].setTotalEmpWage(this.computeWage(companyEmpWage[i]));
-			System.out.println(companyEmpWage[i]);
+			CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 	
