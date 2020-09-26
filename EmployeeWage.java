@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EmployeeWage implements computeEmpWageInterface
 {
@@ -8,10 +9,13 @@ public class EmployeeWage implements computeEmpWageInterface
 	public static final int IS_FULL_TIME = 2;
 	
 	private ArrayList<CompanyEmpWage> companyEmpWageList;
-			
+	private HashMap<String, CompanyEmpWage> companyEmpWageMap;
+		
 	public EmployeeWage() 
 	{
 		companyEmpWageList = new ArrayList<CompanyEmpWage>();
+		
+		companyEmpWageMap = new HashMap<>();
 	}
 		
 	public void addCompanyEmpWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
@@ -20,6 +24,7 @@ public class EmployeeWage implements computeEmpWageInterface
 		
 		companyEmpWageList.add(companyEmpWage);
 		
+		companyEmpWageMap.put(companyName, companyEmpWage);
 	}	
 	
 	public void computeWage()
@@ -30,6 +35,12 @@ public class EmployeeWage implements computeEmpWageInterface
 			companyEmpWage.setTotalEmpWage(this.computeWage(companyEmpWage));
 			System.out.println(companyEmpWage);
 		}
+	}
+	@Override
+	
+	public int getTotalWage(String company)
+	{
+		return companyEmpWageMap.get(company).totalEmpWage;
 	}
 	
 	public int computeWage(CompanyEmpWage companyEmpWage)
@@ -79,5 +90,6 @@ public class EmployeeWage implements computeEmpWageInterface
 		empWageObj.addCompanyEmpWage("Coca-Cola", 10, 4, 20);
 		empWageObj.computeWage();
 		
+		System.out.println("Total Wage for DMart Company: " + empWageObj.getTotalWage("DMart"));
 	}
 }
