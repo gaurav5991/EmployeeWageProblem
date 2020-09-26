@@ -15,10 +15,11 @@ public class EmployeeWage
 	{
 		System.out.println("Welcome to Employee Wage Computation Program");
 		
-		computeWage();	
+		computeWage("Coca-Cola", 20, 2, 10);
+		computeWage("DMart", 10, 4, 20);
 	}
 	
-	public static void computeWage()
+	public static void computeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
 	{
 		int empHrs =  0;
 		
@@ -26,7 +27,7 @@ public class EmployeeWage
 
 		int totalWorkingDays = 0;
 
-		while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+		while(totalEmpHrs <= maxHrsInMonth && totalWorkingDays < numOfWorkingDays)
 		{
 
 			totalWorkingDays++;
@@ -49,7 +50,7 @@ public class EmployeeWage
 			System.out.println("Days: " + totalWorkingDays + " Emp Hr: " + empHrs);
 
 		}
-		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-		System.out.println("Total Employee Wage: " + totalEmpWage);
+		int totalEmpWage = totalEmpHrs * empRatePerHour;
+		System.out.println("Total Employee Wage for Company: "+companyName + " is: " + totalEmpWage);
 	}
 }
