@@ -1,4 +1,4 @@
-public class EmployeeWage
+public class EmployeeWage implements computeEmpWageInterface
 {
 
 	public static final int IS_PART_TIME = 1;
@@ -14,14 +14,14 @@ public class EmployeeWage
 		companyEmpWage = new CompanyEmpWage[5];
 	}
 		
-	private void addCompanyEmpWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
+	public void addCompanyEmpWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
 	{
 		companyEmpWage[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHour, numOfWorkingDays, maxHrsInMonth);
 		
 		numOfCompany++;
 	}	
 	
-	private void computeWage()
+	public void computeWage()
 	{
 		for(int i=0;i<numOfCompany;i++)
 		{
@@ -31,7 +31,7 @@ public class EmployeeWage
 	}
 	
 	
-	private int computeWage(CompanyEmpWage companyEmpWage)
+	public int computeWage(CompanyEmpWage companyEmpWage)
 	{
 		int empHrs =  0;
 		
