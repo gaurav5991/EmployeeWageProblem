@@ -6,12 +6,9 @@ public class EmployeeWage implements computeEmpWageInterface
 	public static final int IS_PART_TIME = 1;
 
 	public static final int IS_FULL_TIME = 2;
-		
-	private int numOfCompany = 0;
 	
 	private ArrayList<CompanyEmpWage> companyEmpWageList;
-	
-		
+			
 	public EmployeeWage() 
 	{
 		companyEmpWageList = new ArrayList<CompanyEmpWage>();
@@ -22,6 +19,7 @@ public class EmployeeWage implements computeEmpWageInterface
 		CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHour, numOfWorkingDays, maxHrsInMonth);
 		
 		companyEmpWageList.add(companyEmpWage);
+		
 	}	
 	
 	public void computeWage()
@@ -34,10 +32,11 @@ public class EmployeeWage implements computeEmpWageInterface
 		}
 	}
 	
-	
 	public int computeWage(CompanyEmpWage companyEmpWage)
 	{
 		int empHrs =  0;
+		
+		int empWage = 0;
 		
 		int  totalEmpHrs = 0;
 
@@ -61,10 +60,10 @@ public class EmployeeWage implements computeEmpWageInterface
 				default:
 					empHrs = 0;
 			}
-
+			companyEmpWage.setEmpWage(companyEmpWage.empRatePerHour * empHrs);
 			totalEmpHrs += empHrs;
 			System.out.println("Days: " + totalWorkingDays + " Emp Hr: " + empHrs);
-
+			System.out.println("Daily Wage for Day "+ totalWorkingDays + " is: " +companyEmpWage.empRatePerHour * empHrs);
 		}
 		
 		 return totalEmpHrs * companyEmpWage.empRatePerHour;
@@ -79,5 +78,6 @@ public class EmployeeWage implements computeEmpWageInterface
 		empWageObj.addCompanyEmpWage("DMart", 20, 2, 10);
 		empWageObj.addCompanyEmpWage("Coca-Cola", 10, 4, 20);
 		empWageObj.computeWage();
+		
 	}
 }
