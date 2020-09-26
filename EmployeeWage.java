@@ -4,22 +4,34 @@ public class EmployeeWage
 		public static final int IS_PART_TIME = 1;
 
 		public static final int IS_FULL_TIME = 2;
-
-		public static final int EMP_RATE_PER_HOUR = 20;		
 		
-		public static final int NUM_OF_WORKING_DAYS = 20;
-	
-		public static final int MAX_HRS_IN_MONTH = 100;
+		private final String companyName;
+		private final int empRatePerHour;
+		private final int numOfWorkingDays;
+		private final int maxHrsInMonth;
+		private int totalEmpWage;
+		
+		public EmployeeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
+		{
+			this.companyName = companyName;
+			this.empRatePerHour = empRatePerHour;
+			this.numOfWorkingDays = numOfWorkingDays;
+			this.maxHrsInMonth = maxHrsInMonth;
+		}
 		
 	public static void main(String[] args)
 	{
 		System.out.println("Welcome to Employee Wage Computation Program");
 		
-		computeWage("Coca-Cola", 20, 2, 10);
-		computeWage("DMart", 10, 4, 20);
+		EmployeeWage dMart = new EmployeeWage("Dmart", 20, 2, 10);
+		System.out.println("DMart");
+		dMart.computeWage();
+		EmployeeWage CocaCola = new EmployeeWage("Coca-Cola", 10, 4, 20);
+		System.out.println("Coca-Cola");
+		CocaCola.computeWage();
 	}
 	
-	public static void computeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
+	public void computeWage()
 	{
 		int empHrs =  0;
 		
@@ -50,7 +62,7 @@ public class EmployeeWage
 			System.out.println("Days: " + totalWorkingDays + " Emp Hr: " + empHrs);
 
 		}
-		int totalEmpWage = totalEmpHrs * empRatePerHour;
-		System.out.println("Total Employee Wage for Company: "+companyName + " is: " + totalEmpWage);
+		totalEmpWage = totalEmpHrs * empRatePerHour;
+		System.out.println("Total Employee Wage for Company "+companyName + " is: " + totalEmpWage);
 	}
 }
