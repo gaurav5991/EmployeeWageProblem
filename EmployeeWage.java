@@ -5,33 +5,33 @@ public class EmployeeWage
 
 	public static final int IS_FULL_TIME = 2;
 		
-	private final String companyName;
-	private final int empRatePerHour;
-	private final int numOfWorkingDays;
-	private final int maxHrsInMonth;
-	private int totalEmpWage;
+	private int numOfCompany = 0;
+	
+	private CompanyEmpWage[] companyEmpWage;
 		
-	public EmployeeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
+	public EmployeeWage() 
 	{
-		this.companyName = companyName;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHrsInMonth = maxHrsInMonth;
+		companyEmpWage = new CompanyEmpWage[5];
 	}
 		
-	public static void main(String[] args)
+	private void addCompanyEmpWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHrsInMonth)
 	{
-		System.out.println("Welcome to Employee Wage Computation Program");
+		companyEmpWage[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHour, numOfWorkingDays, maxHrsInMonth);
 		
-		EmployeeWage dMart = new EmployeeWage("Dmart", 20, 2, 10);
-		System.out.println("DMart");
-		dMart.computeWage();
-		EmployeeWage CocaCola = new EmployeeWage("Coca-Cola", 10, 4, 20);
-		System.out.println("Coca-Cola");
-		CocaCola.computeWage();
+		numOfCompany++;
+	}	
+	
+	private void computeWage()
+	{
+		for(int i=0;i<numOfCompany;i++)
+		{
+			companyEmpWage[i].setTotalEmpWage(this.computeWage(companyEmpWage[i]));
+			System.out.println(companyEmpWage[i]);
+		}
 	}
 	
-	public void computeWage()
+	
+	private int computeWage(CompanyEmpWage companyEmpWage)
 	{
 		int empHrs =  0;
 		
@@ -39,7 +39,7 @@ public class EmployeeWage
 
 		int totalWorkingDays = 0;
 
-		while(totalEmpHrs <= maxHrsInMonth && totalWorkingDays < numOfWorkingDays)
+		while(totalEmpHrs <=companyEmpWage.maxHrsInMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays)
 		{
 
 			totalWorkingDays++;
@@ -62,7 +62,18 @@ public class EmployeeWage
 			System.out.println("Days: " + totalWorkingDays + " Emp Hr: " + empHrs);
 
 		}
-		totalEmpWage = totalEmpHrs * empRatePerHour;
-		System.out.println("Total Employee Wage for Company "+companyName + " is: " + totalEmpWage);
+		
+		 return totalEmpHrs * companyEmpWage.empRatePerHour;
+	}
+	
+	
+	public static void main(String[] args)
+	{
+		System.out.println("Welcome to Employee Wage Computation Program");
+		
+		EmployeeWage empWageObj = new EmployeeWage();
+		empWageObj.addCompanyEmpWage("DMart", 20, 2, 10);
+		empWageObj.addCompanyEmpWage("Coca-Cola", 10, 4, 20);
+		empWageObj.computeWage();
 	}
 }
