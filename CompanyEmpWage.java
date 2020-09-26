@@ -1,4 +1,4 @@
-public class CompanyEmpWage
+public class CompanyEmpWage 
 {
 	public final String companyName;
 	public final int empRatePerHour;
