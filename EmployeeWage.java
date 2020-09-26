@@ -13,9 +13,13 @@ public class EmployeeWage
 		
 	public static void main(String[] args)
 	{
-
 		System.out.println("Welcome to Employee Wage Computation Program");
 		
+		computeWage();	
+	}
+	
+	public static void computeWage()
+	{
 		int empHrs =  0;
 		
 		int  totalEmpHrs = 0;
